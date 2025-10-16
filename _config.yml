@@ -1,0 +1,76 @@
+# Book settings
+# Learn more at https://jupyterbook.org/customize/config.html
+
+title: Aprendiendo OpenCV
+author: Javier Álvarez Osuna
+logo: logo.png
+
+# Force re-execution of notebooks on each build.
+# See https://jupyterbook.org/content/execute.html
+execute:
+  execute_notebooks: force
+
+build:
+  build_directory: "_build"
+  exclude_patterns: 
+    - "**.ipynb_checkpoints"
+    - "**/.DS_Store"
+  create_plots: true
+
+# Define the name of the latex output file for PDF builds
+latex:
+  latex_documents:
+    targetname: book.tex
+  latex_engine: pdflatex
+
+# Add a bibtex file so that we can create citations
+bibtex_bibfiles:
+  - references.bib
+
+# Information about where the book exists on the web
+repository:
+  url: https://github.com/jalosu/learning-opencv  # Online location of your book
+  path_to_book: ""  # Optional path to your book, relative to the repository root
+  branch: master  # Which branch of the repository should be used when creating links (optional)
+
+# Add GitHub buttons to your book
+# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
+html:
+  use_issues_button: true
+  use_repository_button: true
+
+html:
+  extra_footer: ""
+  use_issues_button: false
+  use_repository_button: false
+  use_edit_page_button: false
+  use_download_button: false
+  favicon: logo.png
+  baseurl: ""
+  analitics:
+    google_analytics_id: ""
+
+parse:
+  myst_enable_extensions:
+    - colon_fence
+    - deflist
+    - html_image
+    - dollarmath
+    - amsmath
+
+sphinx:
+  extra_extensions:
+    - sphinxcontrib.bibtex
+    - myst_nb
+  config:
+    html_theme_options:
+      use_download_button: false
+    bibtex_reference_style: author_year  # Fuerza el formato "Autor et al., Año"
+    bibtex_default_style: plain
+    numfig: true
+    source_suffix: [".md", ".ipynb"]
+    mathjax3_config:
+      tex:
+        inlineMath: [['$', '$'], ['\(', '\)']]
+
+use_jupyterbook_latex: true
