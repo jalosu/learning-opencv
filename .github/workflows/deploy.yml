@@ -46,11 +46,11 @@ jobs:
         run: |
           ghp-import -n -p -f _build/html  # Flags: -n (nojekyll), -p (push), -f (force)
         env:
-          GITHUB_TOKEN: ${{secrets.PAT_TOKEN}} # ¡Token automatico de Github!
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}} # ¡Token automatico de Github!
 
       # 7. (Opcional) Forzar actualización de GitHub Pages
       - name: Force GitHub Pages update
         run: |
-          curl -X POST -H "Authorization: token ${{ secrets.PAT_TOKEN }}" \
+          curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
           -H "Accept: application/vnd.github.v3+json" \
           https://api.github.com/repos/${{ github.repository }}/pages/builds
