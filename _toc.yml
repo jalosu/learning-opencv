@@ -4,6 +4,6 @@
 format: jb-book
 root: intro
 chapters:
-- file: content/Dia-1_Camara_como_Matriz.ipynb
+- file: content/Day1/Dia01_Basis.ipynb
   sections:
     - file: content/todelete/markdown-notebooks
