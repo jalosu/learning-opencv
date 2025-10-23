@@ -6,4 +6,4 @@ root: intro.md
 chapters:
 - file: content/Day1/Dia01_Basis.ipynb
   sections:
-    - file: content/todelete/markdown-notebooks
+    - file: content/Day1/Dia01_Ejercicios.ipynb
