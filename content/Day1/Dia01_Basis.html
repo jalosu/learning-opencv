@@ -1,0 +1,1305 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Día 1 — Conceptos básicos &#8212; Aprendiendo OpenCV</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/Day1/Dia01_Basis';</script>
+    <link rel="icon" href="../../_static/logo.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Ejercicios" href="Dia01_Ejercicios.html" />
+    <link rel="prev" title="Welcome to your Jupyter Book" href="../../intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Aprendiendo OpenCV - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Aprendiendo OpenCV - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Día 1 — Conceptos básicos</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Dia01_Ejercicios.html">Ejercicios</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Día 1 — Conceptos básicos</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptos-clave-y-fundamentos-matematicos">1. Conceptos clave y fundamentos matemáticos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imagen-como-funcion-matriz">1.1 Imagen como función/matriz</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imagenes-como-tensores">1.2 Imágenes como tensores</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#espacios-de-color">2. Espacios de color</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptos-fundamentales">2.1 Conceptos fundamentales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-matematicos-simplificados">2.2 Modelos matemáticos simplificados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#espacio-de-color-lineal-vs-no-lineal-gamma">2.3. Espacio de color lineal vs. no lineal (gamma)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operaciones-fundamentales">3. Operaciones fundamentales</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-s-de-imagenes">3.1 E/S de imágenes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inspeccionar-caracteristicas-de-una-imagen">3.2 Inspeccionar características de una imagen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion-entre-espacios-de-color">3.3 Conversión entre espacios de color</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operaciones-con-canales">3.4 Operaciones con canales</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#histogramas">Histogramas</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="dia-1-conceptos-basicos">
+<h1>Día 1 — Conceptos básicos<a class="headerlink" href="#dia-1-conceptos-basicos" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Resumen</p>
+<p><strong>Objetivo del día:</strong> Comprender la naturaleza matricial de las imágenes, los espacios de color más usados (BGR/RGB/GRAY) y dominar las operaciones básicas: E/S, conversión de color y operaciones con canales en OpenCV. Dominar la estructura de una imagen como <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> (análoga a <code class="docutils literal notranslate"><span class="pre">cv::Mat</span></code>), y asentar bases matemáticas mínimas.</p>
+<p><strong>Requisitos:</strong> Python ≥ 3.9, <code class="docutils literal notranslate"><span class="pre">opencv-python</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>.</p>
+</div>
+<section id="conceptos-clave-y-fundamentos-matematicos">
+<h2>1. Conceptos clave y fundamentos matemáticos<a class="headerlink" href="#conceptos-clave-y-fundamentos-matematicos" title="Link to this heading">#</a></h2>
+<section id="imagen-como-funcion-matriz">
+<h3>1.1 Imagen como función/matriz<a class="headerlink" href="#imagen-como-funcion-matriz" title="Link to this heading">#</a></h3>
+<p>Una imagen digital puede modelarse como una función <strong>muestrada y cuantizada</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+I:\Omega \subset \mathbb{Z}^2 \to \mathbb{R}^C,\quad I(x,y) = \big(I_1(x,y),\dots,I_C(x,y)\big)
+\]</div>
+<p>donde:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\((x,y)\)</span> son coordenadas de píxel en una retícula regular,</p></li>
+<li><p><span class="math notranslate nohighlight">\(C\)</span> es el número de canales (1 en escala de grises, 3 en color),</p></li>
+<li><p>la intensidad suele estar cuantizada en 8 bits <code class="docutils literal notranslate"><span class="pre">uint8</span></code><span class="math notranslate nohighlight">\((0\)</span>–<span class="math notranslate nohighlight">\(255)\)</span> o en punto flotante normalizado <code class="docutils literal notranslate"><span class="pre">float32</span></code> <span class="math notranslate nohighlight">\([0,1]\)</span>.</p></li>
+</ul>
+</section>
+<section id="imagenes-como-tensores">
+<h3>1.2 Imágenes como tensores<a class="headerlink" href="#imagenes-como-tensores" title="Link to this heading">#</a></h3>
+<p>Desde un punto de vista matemático, una imagen digital puede entenderse como un <strong>tensor</strong>: una estructura multidimensional que contiene valores numéricos organizados en ejes.</p>
+<ul class="simple">
+<li><p>Una imagen en <strong>escala de grises</strong> se representa como un tensor de orden 2:  <span class="math notranslate nohighlight">\(I \in \mathbb{R}^{H \times W}\)</span> donde <span class="math notranslate nohighlight">\((H)\)</span> es la altura (número de filas) y <span class="math notranslate nohighlight">\((W)\)</span> el ancho (número de columnas).  Cada elemento <span class="math notranslate nohighlight">\(I_{ij}\)</span> representa la intensidad luminosa del píxel en la fila <span class="math notranslate nohighlight">\(i\)</span> y columna <span class="math notranslate nohighlight">\(j\)</span>.</p></li>
+<li><p>Una imagen <strong>en color</strong>, en cambio, se representa como un tensor de orden 3: <span class="math notranslate nohighlight">\(I \in \mathbb{R}^{H \times W \times C}\)</span> donde <span class="math notranslate nohighlight">\(C = 3\)</span> corresponde a los tres canales de color (por ejemplo, <strong>BGR</strong> en OpenCV o <strong>RGB</strong> en Matplotlib).</p></li>
+</ul>
+<p>Cada canal codifica una <strong>componente espectral</strong> de la luz. Así, un píxel completo puede expresarse como un vector tridimensional:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{p}_{ij} = 
+\begin{bmatrix}
+B_{ij} \\ 
+G_{ij} \\ 
+R_{ij}
+\end{bmatrix}
+\end{split}\]</div>
+<p>en el espacio de color BGR.</p>
+<p>En operaciones matriciales, estas imágenes se tratan como tensores en los que las operaciones (suma, resta, multiplicación escalar, etc.) se aplican <strong>por elemento</strong>. <code class="docutils literal notranslate"><span class="pre">NumPy</span></code> facilita estas operaciones mediante el <strong>broadcasting</strong>, que ajusta automáticamente las dimensiones compatibles.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>El broadcasting en <code class="docutils literal notranslate"><span class="pre">NumPy</span></code> es un mecanismo inteligente que permite realizar operaciones aritméticas entre arrays de diferentes dimensiones de forma automática y eficiente, sin necesidad de duplicar físicamente los datos en memoria. Este sistema funciona mediante reglas bien definidas que comparan las dimensiones de los arrays desde la derecha hacia la izquierda, determinando su compatibilidad cuando las dimensiones son iguales, cuando una de ellas es 1, o cuando una dimensión no existe en uno de los arrays. En esencia, el broadcasting “estira” virtualmente los arrays más pequeños para que coincidan con la forma del array más grande, permitiendo operaciones elemento por elemento que de otra manera requerirían costosos bucles o replicaciones explícitas de datos.</p>
+<p>Esta funcionalidad no solo hace que el código sea más conciso y legible, sino que también mejora significativamente el rendimiento al vectorizar las operaciones internamente. Por ejemplo, cuando sumamos un escalar a un array multidimensional, NumPy automáticamente propaga ese valor único a través de todos los elementos del array, o cuando operamos entre un vector fila y una matriz, el sistema replica inteligentemente el vector a lo largo de las dimensiones necesarias. Sin embargo, el broadcasting tiene sus límites y falla cuando las dimensiones de los arrays son fundamentalmente incompatibles según las reglas establecidas, protegiendo así al usuario de resultados erróneos. Esta característica constituye una piedra angular en aplicaciones científicas y de machine learning, donde las operaciones entre datasets de distintas formas son frecuentes y la eficiencia computacional es crucial.</p>
+</div>
+</section>
+</section>
+<section id="espacios-de-color">
+<h2>2. Espacios de color<a class="headerlink" href="#espacios-de-color" title="Link to this heading">#</a></h2>
+<section id="conceptos-fundamentales">
+<h3>2.1 Conceptos fundamentales<a class="headerlink" href="#conceptos-fundamentales" title="Link to this heading">#</a></h3>
+<p>Un <strong>espacio de color</strong> es una forma de representar los colores posibles dentro de un modelo matemático determinado. Los más comunes son:</p>
+<ul class="simple">
+<li><p><strong>RGB / BGR</strong>: El espacio de color RGB (Red, Green, Blue) es un modelo de color aditivo fundamental en la representación digital de imágenes, basado en la combinación de tres componentes luminosos primarios: rojo, verde y azul. RGB opera mediante la síntesis aditiva de luz, donde diferentes intensidades de estos tres canales se mezclan para producir la gama completa de colores visibles, desde el negro absoluto (cuando todos los valores son cero) hasta el blanco puro (cuando los tres componentes alcanzan su máxima intensidad). La estructura de RGB lo hace extremadamente eficiente para el procesamiento computacional y el almacenamiento de datos de imagen, aunque resulta menos intuitivo cuando se intentan realizar ajustes cromáticos específicos, ya que modificaciones aparentemente simples como cambiar el tono de un color requieren alteraciones coordinadas en los tres canales simultáneamente. <code class="docutils literal notranslate"><span class="pre">BGR</span></code> es el espacio de color por defecto de OpenCV. Mantiene la misma base funcional aunque el orden de los tres canales es azul (B), verde (G) y rojo (R).</p></li>
+<li><p><strong>GRAY</strong>: También conocido como escala de grises, es un modelo de representación cromática que reduce toda la información de color a un único canal de intensidad lumínica, eliminando por completo los componentes de tonalidad y saturación. En este sistema unidimensional, cada píxel se representa mediante un valor numérico que exclusivamente codifica su nivel de brillo, oscilando típicamente entre el negro absoluto (valor 0) y el blanco puro (valor máximo, usualmente 255 en imágenes de 8 bits), con toda la gama de grises intermedios distribuidos proporcionalmente según su luminosidad perceptual. Esta transformación se calcula generalmente mediante una fórmula ponderada que combina los canales originales RGB:
+<span class="math notranslate nohighlight">\(
+0.299 \cdot R + 0.587 \cdot G + 0.114 \cdot B
+\)</span>
+donde los coeficientes reflejan la sensibilidad diferencial del ojo humano a cada color primario, priorizando el verde sobre el rojo y el azul para lograr una conversión perceptualmente precisa. Al descartar toda la información cromática y conservar únicamente los datos de luminancia, el espacio GRAY resulta especialmente útil para aplicaciones de procesamiento de imágenes que se centran en análisis estructural, detección de bordes, reconocimiento de patrones o cualquier tarea donde la información de textura y contraste sea más relevante que el color mismo, además de ofrecer una significativa reducción en la complejidad computacional y los requisitos de almacenamiento al trabajar con un solo canal en lugar de tres.</p></li>
+<li><p><strong>HSV</strong>: El espacio de color HSV (Hue, Saturation, Value) es un modelo de representación cromática que organiza los colores de forma más intuitiva que el tradicional RGB, basándose en cómo los seres humanos perciben y describen los atributos del color. En este sistema tridimensional, el <strong>Matiz (Hue)</strong> se representa como un círculo cromático continuo donde cada ángulo corresponde a un color puro específico, desde el rojo en 0° hasta los violetas en 360°. La <strong>Saturación (Saturation)</strong> controla la intensidad o pureza del color, variando desde tonos grisáceos neutros en el valor mínimo hasta colores completamente vivos y puros en el máximo. El <strong>Valor (Value)</strong> determina la luminosidad general, escalando desde el negro absoluto hasta el máximo brillo del color, independientemente de su tono. Esta separación entre el aspecto cromático (matiz), la intensidad del color (saturación) y el brillo (valor) permite manipulaciones más naturales en aplicaciones de edición gráfica, selección de paletas de colores y procesamiento de imágenes, ya que los usuarios pueden ajustar cada componente perceptual por separado sin afectar necesariamente a los demás, facilitando operaciones como cambiar tonos específicos, ajustar contraste o crear degradados armónicos.</p></li>
+<li><p><strong>LAB</strong>: El espacio de color LAB, también conocido como CIELAB, es un modelo de color diseñado para ser perceptualmente uniforme, lo que significa que las distancias matemáticas entre colores en este espacio se correlacionan directamente con las diferencias percibidas por el ojo humano. Organizado en tres ejes, la <code class="docutils literal notranslate"><span class="pre">L</span></code> representa la luminosidad* (desde el negro 0 hasta el blanco 100), el eje <code class="docutils literal notranslate"><span class="pre">A</span></code> define la posición entre el verde (valores negativos) y el rojo (valores positivos), y el eje <code class="docutils literal notranslate"><span class="pre">B</span></code> representa la posición entre el azul (valores negativos) y el amarillo (valores positivos). A diferencia de los espacios dependientes de dispositivos como RGB, LAB es un espacio de color independiente y pretende encapsular todo el rango de colores que los humanos pueden percibir. Esta característica lo hace particularmente valioso en aplicaciones de edición de imágenes avanzada, control de calidad de color en la industria, y algoritmos de visión por computadora donde la percepción visual precisa y la consistencia del color bajo diferentes condiciones de iluminación son fundamentales, ya que permite ajustes de color que resultan más intuitivos y visualmente coherentes.</p></li>
+<li><p><strong>YCrCb</strong>:  Este espacio de color es un modelo de representación cromática que separa la información de una imagen en tres componentes distintos: <code class="docutils literal notranslate"><span class="pre">Y</span></code> representa la luminancia (componente de brillo), <code class="docutils literal notranslate"><span class="pre">Cb</span></code> codifica la diferencia entre el componente azul y la luminancia, y <code class="docutils literal notranslate"><span class="pre">Cr</span></code> representa la diferencia entre el componente rojo y la luminancia. Este sistema se diseñó específicamente para sistemas de video y compresión de imágenes digitales, aprovechando la menor sensibilidad del ojo humano a las variaciones cromáticas en comparación con las variaciones de brillo. Al separar la información de luminancia de la crominancia, YCbCr permite aplicar técnicas de submuestreo (como 4:2:2 o 4:2:0) donde la información de color se almacena con menor resolución que la información de brillo sin pérdidas perceptibles significativas en la calidad visual. Esta característica lo hace fundamental en estándares de compresión ampliamente utilizados como JPEG para imágenes estáticas y MPEG/H.264 para video digital, donde se logran altas tasas de compresión al reducir selectivamente los datos cromáticos mientras se preserva la calidad en los detalles estructurales capturados por el componente de luminancia.</p></li>
+</ul>
+<p>OpenCV gestiona internamente las imágenes en el espacio de color BGR (Blue-Green-Red) debido a condicionantes históricos vinculados a las primeras implementaciones de bibliotecas de visión artificial y a convenciones heredadas de los primeros sistemas de captura. Esta particularidad genera una discrepancia fundamental con la mayoría de ecosistemas de visualización (como <code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code> o <code class="docutils literal notranslate"><span class="pre">PIL/Pillow</span></code>) que operan bajo el estándar RGB (Red-Green-Blue), estructura alineada con los modelos perceptuales humanos y los espacios colorimétricos convencionales.</p>
+<p>Para resolver esta disonancia estructural, OpenCV incorpora mecanismos de transformación bidireccional mediante funciones especializadas en conversión de espacios de color <code class="docutils literal notranslate"><span class="pre">cv2.Color()</span></code> , permitiendo una transposición eficiente y sin pérdida de información entre ambos modelos mediante operaciones de reordenamiento canales. Esta capa de abstracción garantiza la interoperabilidad entre subsistemas de procesamiento y visualización, simplificando flujos de trabajo en <em>pipelines</em> de procesamiento de imágenes donde la coherencia en la representación cromática es crucial para el análisis cuantitativo y la interpretación visual de resultados.</p>
+</section>
+<section id="modelos-matematicos-simplificados">
+<h3>2.2 Modelos matemáticos simplificados<a class="headerlink" href="#modelos-matematicos-simplificados" title="Link to this heading">#</a></h3>
+<ul>
+<li><p><strong>HSV (normalizado):</strong>
+Sea <span class="math notranslate nohighlight">\((R,G,B)\in[0,1]^3\)</span>, <span class="math notranslate nohighlight">\(M=\max(R,G,B)\)</span>, <span class="math notranslate nohighlight">\(m=\min(R,G,B)\)</span>, <span class="math notranslate nohighlight">\(\Delta=M-m\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  V=M,\quad S=\begin{cases}
+  0 &amp; \text{si } M=0,\\
+  \Delta/M &amp; \text{en otro caso}
+  \end{cases}
+  \end{split}\]</div>
+<p>El <strong>tono</strong> <span class="math notranslate nohighlight">\(H\)</span> (en grados) es:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}H = \begin{cases}
+0 &amp; \Delta=0,\\
+60^\circ \cdot \big((G-B)/\Delta \bmod 6\big) &amp; M=R,\\
+60^\circ \cdot \big((B-R)/\Delta + 2\big) &amp; M=G,\\
+60^\circ \cdot \big((R-G)/\Delta + 4\big) &amp; M=B.
+\end{cases}\end{split}\]</div>
+</li>
+<li><p><strong>YCrCb (BT.601):</strong></p>
+<div class="math notranslate nohighlight">
+\[Y  = 0.299R + 0.587G + 0.114B,\quad
+Cb = \frac{B - Y}{1.772},\quad
+Cr = \frac{R - Y}{1.402}.\]</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Los coeficientes estándares BT.601 y BT.709 son especificaciones técnicas desarrolladas por la Unión Internacional de Telecomunicaciones (ITU) que definen los parámetros para la conversión entre espacios de color en sistemas de video y televisión digital.</p>
+<p>BT.601 (Recomendación ITU-R BT.601), también conocido como “Rec. 601”, fue establecido originalmente para la televisión digital estándar (SDTV) y se utiliza principalmente para contenido de definición estándar con resoluciones como 720x480 (NTSC) y 720x576 (PAL). Sus coeficientes para la conversión a YCbCr reflejan las características de los CRT tradicionales y emplean las siguientes ponderaciones: Y = 0.299R + 0.587G + 0.114B.</p>
+<p>BT.709 (Recomendación ITU-R BT.709), conocido como “Rec. 709”, fue desarrollado para televisión de alta definición (HDTV) y constituye el espacio de color estándar para contenido HD y Full HD. Este estándar utiliza coeficientes diferentes: Y = 0.2126R + 0.7152G + 0.0722B, que están optimizados para las tecnologías de pantalla moderna como LCD, plasma y OLED, reflejando una mayor sensibilidad al verde acorde con la percepción visual humana contemporánea y las capacidades de los dispositivos de visualización actuales.</p>
+<p>La diferencia fundamental entre ambos radica en que BT.709 asigna más peso al componente verde, reconociendo su mayor importancia en la percepción de luminancia por el ojo humano en sistemas de alta definición, mientras que BT.601 mantiene una distribución más equilibrada entre rojo y verde para los sistemas de definición estándar. En OpenCV, la conversión utiliza por defecto los coeficientes BT.601, pero puede especificarse el estándar deseado mediante parámetros adicionales en las funciones de procesamiento de video.</p>
+</div>
+</li>
+<li><p><strong>LAB</strong> se define una serie de pasos intermedios que comprenden: RGB→CIE XYZ (lineal), normalización con iluminante de referencia, transformación no lineal XYZ→LAB (no lineal).</p>
+<ul>
+<li><p>Conversión RGB → CIE XYZ</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+X &amp;= 0.412453 \cdot R + 0.357580 \cdot G + 0.180423 \cdot B \\
+Y &amp;= 0.212671 \cdot R + 0.715160 \cdot G + 0.072169 \cdot B \\
+Z &amp;= 0.019334 \cdot R + 0.119193 \cdot G + 0.950227 \cdot B
+\end{aligned}\end{split}\]</div>
+</li>
+<li><p>Normalización con Iluminante de Referencia (D65)</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+X_n &amp;= 0.950456 \\
+Y_n &amp;= 1.000000 \\
+Z_n &amp;= 1.088754 \\
+\\
+X' &amp;= \frac{X}{X_n} \\
+Y' &amp;= \frac{Y}{Y_n} \\
+Z' &amp;= \frac{Z}{Z_n}
+\end{aligned}\end{split}\]</div>
+</li>
+<li><p>Función de transformación no lineal</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f(t) = 
+\begin{cases}
+t^{1/3} &amp; \text{si } t &gt; 0.008856 \\
+7.787 \cdot t + \frac{16}{116} &amp; \text{si } t \leq 0.008856
+\end{cases}\end{split}\]</div>
+</li>
+<li><p>Coordenadas LAB</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+L^* &amp;= 116 \cdot f(Y') - 16 \\
+a^* &amp;= 500 \cdot \left[f(X') - f(Y')\right] \\
+b^* &amp;= 200 \cdot \left[f(Y') - f(Z')\right]
+\end{aligned}\end{split}\]</div>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="espacio-de-color-lineal-vs-no-lineal-gamma">
+<h3>2.3. Espacio de color lineal vs. no lineal (gamma)<a class="headerlink" href="#espacio-de-color-lineal-vs-no-lineal-gamma" title="Link to this heading">#</a></h3>
+<p>Las cámaras y pantallas <strong>no capturan ni muestran la luz de forma lineal</strong> con respecto a la energía luminosa.</p>
+<p>Por motivos fisiológicos y técnicos, la mayoría de las imágenes digitales usan el espacio <code class="docutils literal notranslate"><span class="pre">sRGB</span></code>, que aplica una <strong>corrección gamma</strong>: una función no lineal que comprime los valores de luminancia.</p>
+<ul>
+<li><p>En un espacio <strong>lineal</strong>, la intensidad <span class="math notranslate nohighlight">\(L\)</span> es <strong>proporcional</strong> a la energía luminosa real.</p></li>
+<li><p>En un espacio <strong>no lineal (sRGB)</strong>, el valor almacenado <span class="math notranslate nohighlight">\(V\)</span> está relacionado con <span class="math notranslate nohighlight">\(L\)</span> por una potencia gamma:
+$<span class="math notranslate nohighlight">\(
+V = L^{1/\gamma}, \quad  \gamma \approx 2.2
+\)</span>$</p>
+<p>y su inversa:
+$<span class="math notranslate nohighlight">\(
+L = V^{\gamma}
+\)</span>$</p>
+</li>
+</ul>
+<p>Por tanto, para realizar cálculos físicos o matemáticos (por ejemplo, combinaciones de imágenes, promedios, o ajustes de exposición) debemos <strong>linealizar</strong> la imagen:</p>
+<ol class="arabic simple">
+<li><p>Normalizar los valores de 8 bits a rango <span class="math notranslate nohighlight">\([0, 1]\)</span>:
+$<span class="math notranslate nohighlight">\(
+V' = \frac{V}{255}
+\)</span>$</p></li>
+<li><p>Aplicar la corrección inversa:
+$<span class="math notranslate nohighlight">\(
+L = (V')^{\gamma}
+\)</span>$</p></li>
+</ol>
+<p>Y una vez terminados los cálculos, para visualizar correctamente en pantalla debemos <strong>reaplicar la gamma directa</strong>:
+$<span class="math notranslate nohighlight">\(
+V' = L^{1/\gamma}, \quad V = 255 \cdot V'
+\)</span>$</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Ejemplo
+Supongamos dos píxeles con valores de luminancia física <span class="math notranslate nohighlight">\(0.25\)</span> y <span class="math notranslate nohighlight">\(0.50\)</span>.</p>
+<p>En el espacio <strong>lineal</strong>, el segundo es exactamente el doble de brillante.  Sin embargo, en sRGB (no lineal):</p>
+<div class="math notranslate nohighlight">
+\[
+V_1 = (0.25)^{1/2.2} \approx 0.53,\quad
+V_2 = (0.50)^{1/2.2} \approx 0.73
+\]</div>
+<p>Al convertir de nuevo a 8 bits, los valores son 135 y 186, y <strong>la diferencia ya no es lineal</strong>: el ojo humano percibe el segundo píxel menos de “el doble” de brillante, ajustando la percepción a la realidad visual.</p>
+</div>
+<div class="admonition-conclusion-practica admonition">
+<p class="admonition-title">Conclusión práctica</p>
+<ul class="simple">
+<li><p>Para <strong>visualizar imágenes</strong>, se usa sRGB (no lineal).</p></li>
+<li><p>Para <strong>procesarlas matemáticamente</strong> (promedios, convoluciones, blending, etc.), conviene transformarlas a un <strong>espacio lineal</strong> y al finalizar re-aplicar la gamma inversa para visualizar.</p></li>
+<li><p>OpenCV no aplica corrección gamma de forma automática: los valores que devuelve <code class="docutils literal notranslate"><span class="pre">cv2.imread()</span></code> están en el espacio sRGB estándar (no lineal).</p></li>
+</ul>
+<p>En resumen, comprender los espacios de color y la diferencia entre representaciones lineales y no lineales es esencial para evitar errores de interpretación en la intensidad, el brillo o las operaciones matemáticas sobre imágenes.</p>
+</div>
+</section>
+</section>
+<section id="operaciones-fundamentales">
+<h2>3. Operaciones fundamentales<a class="headerlink" href="#operaciones-fundamentales" title="Link to this heading">#</a></h2>
+<section id="e-s-de-imagenes">
+<h3>3.1 E/S de imágenes<a class="headerlink" href="#e-s-de-imagenes" title="Link to this heading">#</a></h3>
+<p>La función usada para leer imágenes es <strong><code class="docutils literal notranslate"><span class="pre">cv2.imred</span></code></strong>, cuya definición formal es  <code class="docutils literal notranslate"><span class="pre">v2.imread(filename,</span> <span class="pre">flags=int)</span> <span class="pre">→</span> <span class="pre">retval</span></code> en donde:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">filename</span></code>: es la ruta completa o relativa del archivo de imagen a cargar</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">flags</span></code>: es un entero opcional que especifica como cargar la imagen con los siguientes valores posibles:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">cv2.IMREAD_COLOR</span></code> o 1: Carga imagen a color (BGR, 8-bit por canal)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cv2.IMREAD_GRAYSCALE</span></code> o 0: Carga imagen en escala de grises</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cv2.IMREAD_UNCHANGED</span></code> o -1: Carga imagen incluyendo canal alfa</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cv2.IMREAD_ANYDEPTH</span></code>: Carga imagen con profundidad original</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cv2.IMREAD_ANYCOLOR</span></code>: Carga imagen en cualquier formato de color</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cv2.IMREAD_REDUCED_GRAYSCALE_2</span></code>: Escala de grises reducida a 1/2</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cv2.IMREAD_REDUCED_COLOR_2</span></code>: Color reducido a 1/2</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cv2.IMREAD_REDUCED_GRAYSCALE_4</span></code>: Escala de grises reducida a 1/4</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cv2.IMREAD_REDUCED_COLOR_4</span></code>: Color reducido a 1/4</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cv2.IMREAD_REDUCED_GRAYSCALE_8</span></code>: Escala de grises reducida a 1/8</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cv2.IMREAD_REDUCED_COLOR_8</span></code>: Color reducido a 1/8</p></li>
+</ul>
+</li>
+</ul>
+<p>El valor por defecto es <code class="docutils literal notranslate"><span class="pre">cv2.IMREAD_COLOR</span></code>.</p>
+<div class="admonition-recuerda-que admonition">
+<p class="admonition-title">Recuerda que:</p>
+<p>OpenCV emplea el espacio de color BGR (Blue-Green-Red) en lugar del estándar RGB (Red-Green-Blue). Esta discrepancia en el orden de los canales tiene consecuencias críticas al interoperar con otras bibliotecas del ecosistema Python. Matplotlib, PIL/Pillow, Scikit-image y la mayoría de herramientas de visualización esperan imágenes en formato RGB estándar. Si se visualiza directamente una imagen cargada con OpenCV sin realizar la conversión adecuada, se produce una distorsión cromática sistemática donde los tonos rojos y azules aparecen intercambiados, comprometiendo la fidelidad del color y invalidando cualquier análisis visual o cuantitativo basado en la apariencia cromática.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># IMPORTACIÓN DE LIBRERÍAS</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">cv2</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="c1"># Ajustes de visualización en notebook</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;La versión de OpenCV instalada es: </span><span class="si">{</span><span class="n">cv2</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># RUTA DE ENTRADA</span>
+<span class="n">imgFolder</span> <span class="o">=</span> <span class="s2">&quot;../img/&quot;</span>
+<span class="n">imgName</span> <span class="o">=</span> <span class="s2">&quot;imagen_1.jpg&quot;</span>
+
+<span class="c1"># LECTURA DE LA IMAGEN</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">imgFolder</span> <span class="o">+</span> <span class="n">imgName</span><span class="p">),</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_COLOR</span><span class="p">)</span>
+
+<span class="c1"># VISUALIZACION IMAGEN</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Izquierda: mostrar el array en BGR (incorrecto en Matplotlib, pero lo forzamos para ilustrar la diferencia)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>  <span class="c1"># interpretado como RGB =&gt; colores &quot;raros&quot; porque el array está en BGR</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Interpretado como RGB (input BGR)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="c1"># Derecha: conversión BGR-&gt;RGB correcta</span>
+<span class="n">img_rgb</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_rgb</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Convertido a RGB (correcto)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La versión de OpenCV instalada es: 4.12.0
+</pre></div>
+</div>
+<img alt="../../_images/c8de8d1e36367e39796a909e5733999bfbcf51445876f245df9fbcbdbf3d6cd9.png" src="../../_images/c8de8d1e36367e39796a909e5733999bfbcf51445876f245df9fbcbdbf3d6cd9.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TRANSFORMACIÓN A ESCALA DE GRISES</span>
+<span class="n">img_gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
+
+<span class="c1"># VISUALIZACION IMAGEN</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_gray</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Imagen escala de grises&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/894707094e79b1a4cbc625ba65ee4dfcd815e55a06bcd6de2978c6523cf374ec.png" src="../../_images/894707094e79b1a4cbc625ba65ee4dfcd815e55a06bcd6de2978c6523cf374ec.png" />
+</div>
+</div>
+<p>La función <strong><code class="docutils literal notranslate"><span class="pre">cv2.imwrite()</span></code></strong> es fundamental para guardar imágenes en disco una vez que se ha realizado algún procesamiento sobre ellas. Su funcionamiento consiste en tomar una matriz de imagen en formato <code class="docutils literal notranslate"><span class="pre">NumPy</span></code> y codificarla en el formato de archivo especificado para almacenarla permanentemente en el sistema de archivos. La definición formal de dicha función es: <code class="docutils literal notranslate"><span class="pre">cv2.imwrite(filename,</span> <span class="pre">img,</span> <span class="pre">params=None)</span> <span class="pre">-&gt;</span> <span class="pre">retval</span></code> en donde:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">filename</span></code>: Cadena de caracteres que especifica la ruta completa y nombre del archivo donde se guardará la imagen. La extensión del archivo determina el formato de codificación (ej: .jpg, .png, .tiff).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">img</span></code>: Matriz NumPy que contiene los datos de la imagen a guardar. Para imágenes en color, OpenCV espera por defecto el formato BGR.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">params</span></code>: Lista de pares de enteros que especifican parámetros de codificación específicos para cada formato. El primer elemento de cada par representa el código del parámetro y el segundo su valor. Un listado completo de los parámetros disponibles se encuentra <a class="reference external" href="https://docs.opencv.org/4.x/d8/d6a/group__imgcodecs__flags.html#ga292d81be8d76901bff7988d18d2b42ac">aquí</a>.</p></li>
+</ul>
+<p>El siguiente código ilustra como guardar la imagen en escala de grises anterior en formato .png:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">saveFolder</span> <span class="o">=</span> <span class="s2">&quot;./saved/&quot;</span>
+<span class="n">saved_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">saveFolder</span> <span class="o">+</span> <span class="s2">&quot;imagen_1BW.png&quot;</span><span class="p">)</span>
+
+<span class="n">success</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">saved_path</span><span class="p">,</span> <span class="n">img_gray</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">success</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Imagen guardada correctamente en: </span><span class="si">{</span><span class="n">saved_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Error al guardar la imagen&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✅ Imagen guardada correctamente en: saved/imagen_1BW.png
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="inspeccionar-caracteristicas-de-una-imagen">
+<h3>3.2 Inspeccionar características de una imagen<a class="headerlink" href="#inspeccionar-caracteristicas-de-una-imagen" title="Link to this heading">#</a></h3>
+<p>En el procesamiento digital de imágenes, la inspección de las características fundamentales de una matriz de píxeles constituye el primer paso en cualquier pipeline de análisis. La propiedad <strong><code class="docutils literal notranslate"><span class="pre">shape</span></code></strong> (forma o dimensionalidad) de una imagen digital describe la organización estructural de sus datos en términos de dimensiones espaciales y canales de color, retornando una tupla que especifica: <code class="docutils literal notranslate"><span class="pre">(alto,</span> <span class="pre">ancho)</span></code> para imágenes en escala de grises o <code class="docutils literal notranslate"><span class="pre">(alto,</span> <span class="pre">ancho,</span> <span class="pre">canales)</span></code> para imágenes en color. Complementariamente, los <strong><code class="docutils literal notranslate"><span class="pre">strides</span></code></strong> (pasos o avances) definen el espaciado en bytes entre elementos consecutivos a lo largo de cada dimensión en la representación interna de la matriz, optimizando así el acceso a la memoria y permitiendo operaciones eficientes de submuestreo y reposicionamiento sin copia física de datos. En otras palabras, los <strong><code class="docutils literal notranslate"><span class="pre">strides</span></code></strong> son el número de <strong>bytes</strong> que hay que saltar para avanzar una unidad en cada eje. En una imagen <code class="docutils literal notranslate"><span class="pre">H×W×C</span></code>(alto x ancho x canales) con valores para cada canal entre 0-255 (<code class="docutils literal notranslate"><span class="pre">uint8</span></code>), típicamente:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">stride_H</span> <span class="pre">=</span> <span class="pre">W*C</span></code> bytes para saltar a la siguiente fila,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stride_W</span> <span class="pre">=</span> <span class="pre">C</span></code> bytes para pasar al siguiente pixel en la fila,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stride_C</span> <span class="pre">=</span> <span class="pre">1</span></code> byte para pasar al siguiente canal del mismo pixel.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># FUNCIÓN PARA INSPECCIONAR CARACTERÍSTICAS</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">analizar_dimensiones</span><span class="p">(</span><span class="n">imagen</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Analiza y separa las dimensiones de una imagen&quot;&quot;&quot;</span>
+    <span class="n">dims</span> <span class="o">=</span> <span class="n">imagen</span><span class="o">.</span><span class="n">shape</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dims</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">alto</span><span class="p">,</span> <span class="n">ancho</span> <span class="o">=</span> <span class="n">dims</span>
+        <span class="n">canales</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">tipo</span> <span class="o">=</span> <span class="s2">&quot;Escala de grises&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">alto</span><span class="p">,</span> <span class="n">ancho</span><span class="p">,</span> <span class="n">canales</span> <span class="o">=</span> <span class="n">dims</span>
+        <span class="n">tipo</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Color (</span><span class="si">{</span><span class="n">canales</span><span class="si">}</span><span class="s2"> canales)&quot;</span>
+    
+    <span class="k">return</span> <span class="n">tipo</span><span class="p">,</span> <span class="n">alto</span><span class="p">,</span> <span class="n">ancho</span><span class="p">,</span> <span class="n">canales</span>
+
+
+<span class="c1"># LECTURA DE LA IMAGEN</span>
+<span class="n">img_folder</span> <span class="o">=</span> <span class="s2">&quot;../img/&quot;</span>
+<span class="n">img_file</span> <span class="o">=</span> <span class="s2">&quot;imagen_2.jpg&quot;</span> 
+<span class="n">img_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">img_folder</span> <span class="o">+</span> <span class="n">img_file</span><span class="p">)</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">img_path</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_COLOR</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">img</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No se pudo leer la imagen en </span><span class="si">{</span><span class="n">img_path</span><span class="si">}</span><span class="s2">. Comprueba la ruta y permisos.&quot;</span><span class="p">)</span>
+
+<span class="c1"># EXTRACCIÓN DE CARACTERÍSTICAS</span>
+<span class="n">tipo</span><span class="p">,</span> <span class="n">alto</span><span class="p">,</span> <span class="n">ancho</span><span class="p">,</span> <span class="n">canales</span> <span class="o">=</span> <span class="n">analizar_dimensiones</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tipo: </span><span class="si">{</span><span class="n">tipo</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dimensiones: </span><span class="si">{</span><span class="n">alto</span><span class="si">}</span><span class="s2">px alto x </span><span class="si">{</span><span class="n">ancho</span><span class="si">}</span><span class="s2">px ancho&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Relación de aspecto: </span><span class="si">{</span><span class="n">ancho</span><span class="o">/</span><span class="n">alto</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tipo: Color (3 canales)
+Dimensiones: 720px alto x 540px ancho
+Relación de aspecto: 0.75
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># FUNCIÓN PARA ANALIZAR STRIDES</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">analizar_strides</span><span class="p">(</span><span class="n">imagen</span><span class="p">,</span> <span class="n">nombre</span><span class="o">=</span><span class="s2">&quot;Imagen&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== ANÁLISIS DE STRIDES - </span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s2"> ===&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Shape: </span><span class="si">{</span><span class="n">imagen</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;dtype: </span><span class="si">{</span><span class="n">imagen</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Strides completo: </span><span class="si">{</span><span class="n">imagen</span><span class="o">.</span><span class="n">strides</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Manejar diferentes dimensiones</span>
+    <span class="n">strides</span> <span class="o">=</span> <span class="n">imagen</span><span class="o">.</span><span class="n">strides</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">imagen</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="c1"># Escala de grises: (bytes_por_fila, bytes_por_pixel)</span>
+        <span class="n">bytes_por_fila</span><span class="p">,</span> <span class="n">bytes_por_pixel</span> <span class="o">=</span> <span class="n">strides</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Imagen en escala de grises&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bytes por fila: </span><span class="si">{</span><span class="n">bytes_por_fila</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bytes por pixel: </span><span class="si">{</span><span class="n">bytes_por_pixel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">imagen</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="c1"># Color: (bytes_por_fila, bytes_por_pixel, bytes_por_canal)</span>
+        <span class="n">bytes_por_fila</span><span class="p">,</span> <span class="n">bytes_por_pixel</span><span class="p">,</span> <span class="n">bytes_por_canal</span> <span class="o">=</span> <span class="n">strides</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Imagen en color&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bytes por fila: </span><span class="si">{</span><span class="n">bytes_por_fila</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bytes por pixel: </span><span class="si">{</span><span class="n">bytes_por_pixel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bytes por canal: </span><span class="si">{</span><span class="n">bytes_por_canal</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Cálculo del tamaño total</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tamaño total en memoria: </span><span class="si">{</span><span class="n">imagen</span><span class="o">.</span><span class="n">nbytes</span><span class="si">}</span><span class="s2"> bytes&quot;</span><span class="p">)</span>
+
+<span class="c1"># EXTRACCIÓN DE STRIDES</span>
+<span class="n">analizar_strides</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== ANÁLISIS DE STRIDES - Imagen ===
+Shape: (720, 540, 3)
+dtype: uint8
+Strides completo: (1620, 3, 1)
+Imagen en color
+Bytes por fila: 1620
+Bytes por pixel: 3
+Bytes por canal: 1
+Tamaño total en memoria: 1166400 bytes
+</pre></div>
+</div>
+</div>
+</div>
+<p>Un aspecto importante es el <strong>tipo de dato</strong> (<code class="docutils literal notranslate"><span class="pre">dtype</span></code>) que determina el rango dinámico, la precisión y las características de cuantización de la imagen, influyendo directamente en las operaciones de procesamiento y análisis que pueden aplicarse. Muchas funciones de OpenCV esperan rangos diferentes según el <code class="docutils literal notranslate"><span class="pre">dtype</span></code>, siendo los más comunes:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">dtype</span></code></p></th>
+<th class="head"><p>Rango</p></th>
+<th class="head"><p>Aplicación típica</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>uint8</p></td>
+<td><p><span class="math notranslate nohighlight">\(0 - 255\)</span></p></td>
+<td><p>Imágenes estándar (JPEG, PNG)</p></td>
+</tr>
+<tr class="row-odd"><td><p>uint16</p></td>
+<td><p><span class="math notranslate nohighlight">\(0 - 65.535\)</span></p></td>
+<td><p>Imágenes médicas, RAW</p></td>
+</tr>
+<tr class="row-even"><td><p>float32</p></td>
+<td><p><span class="math notranslate nohighlight">\(\pm 3.4 \times 10^{38}\)</span></p></td>
+<td><p>Cálculos alta precisión</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="conversion-entre-espacios-de-color">
+<h3>3.3 Conversión entre espacios de color<a class="headerlink" href="#conversion-entre-espacios-de-color" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">cv2.cvtColor</span></code> es la función fundamental en OpenCV para transformar imágenes entre diferentes espacios de color, permitiendo adaptar la representación visual según los requerimientos de procesamiento, análisis o visualización. Entre sus características esenciales podemos destacar:</p>
+<ul class="simple">
+<li><p>Transformación pixel a pixel basada en modelos colorimétricos.</p></li>
+<li><p>Preserva las dimensiones espaciales (alto y ancho) de la imagen.</p></li>
+<li><p>Puede modificar el número de canales (ej: 3 canales BGR → 1 canal escala de grises).</p></li>
+<li><p>Implementa fórmulas de conversión estandarizadas (CIE, ITU-R, …).</p></li>
+<li><p>Optimizada para rendimiento con operaciones vectorizadas.</p></li>
+</ul>
+<p>La definición formal de esta función es <code class="docutils literal notranslate"><span class="pre">cv2.cvtColor(src,</span> <span class="pre">code[,</span> <span class="pre">dst[,</span> <span class="pre">dstCn]])</span> <span class="pre">-&gt;</span> <span class="pre">dst</span></code> en donde:</p>
+<div class="pst-scrollable-table-container"><table class="table" id="tabla-parametros-cvtcolor">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parámetro</p></th>
+<th class="head"><p>Tipo</p></th>
+<th class="head"><p>Descripción</p></th>
+<th class="head"><p>Requerido</p></th>
+<th class="head"><p>Valor por Defecto</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">src</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p></td>
+<td><p>Imagen de entrada en formato de array NumPy</p></td>
+<td><p><strong>Sí</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">code</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p>Código de conversión (ej: cv2.COLOR_BGR2RGB, cv2.COLOR_BGR2HSV)</p></td>
+<td><p><strong>Sí</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dst</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p></td>
+<td><p>Array de salida opcional para almacenar el resultado</p></td>
+<td><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dstCn</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p>Número de canales en la imagen de destino</p></td>
+<td><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code> (automático)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>En la versión OpenCV 4.x esta función ofrece 374 espacios de color, cuya información se puede consultar en <a class="reference external" href="https://docs.opencv.org/4.12.0/d8/d01/group__imgproc__color__conversions.html">este enlace</a>. En el siguiente código explotraremos cómo convertir imágenes entre diferentes espacios de color</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">cv2</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+
+<span class="c1"># Cargar imagen original</span>
+<span class="n">img_folder</span> <span class="o">=</span> <span class="s2">&quot;../img/&quot;</span>
+<span class="n">img_file</span> <span class="o">=</span> <span class="s2">&quot;imagen_2.jpg&quot;</span> 
+<span class="n">img_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">img_folder</span> <span class="o">+</span> <span class="n">img_file</span><span class="p">)</span>
+<span class="n">img_original</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">img_path</span><span class="p">,</span><span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_COLOR</span><span class="p">)</span>
+
+<span class="c1"># Conversiones a diferentes espacios de color</span>
+<span class="n">img_rgb</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img_original</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
+<span class="n">img_hsv</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img_original</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2HSV</span><span class="p">)</span>
+<span class="n">img_lab</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img_original</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2LAB</span><span class="p">)</span>
+<span class="n">img_ycrcb</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img_original</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2YCrCb</span><span class="p">)</span>
+<span class="n">img_gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img_original</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
+
+<span class="c1"># Configurar la visualización</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Imagen original (RGB)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_rgb</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;RGB (Original)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="c1"># Espacio HSV</span>
+<span class="c1"># Para visualizar HSV, necesitamos convertir a RGB o mostrar canales por separado</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_hsv</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;HSV&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="c1"># Espacio LAB</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img_lab</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_LAB2RGB</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;LAB&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="c1"># Espacio YCrCb</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img_ycrcb</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_YCrCb2RGB</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;YCrCb&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="c1"># Escala de grises</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_gray</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Escala de Grises&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="c1"># Espacio vacío o para otra conversión</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_original</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;BGR (OpenCV)&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/81b78380f191ad5b3b7890a498884265caa9ee76a7967d3794bad05246a54065.png" src="../../_images/81b78380f191ad5b3b7890a498884265caa9ee76a7967d3794bad05246a54065.png" />
+</div>
+</div>
+<p>En OpenCV no existe un atributo interno que indique directamente el espacio de color actual de una imagen  ya que la matriz solo almacena valores numéricos sin metadatos sobre su interpretación. Sin embargo se puede inferir de forma heurística el espacio de color. Este proceso se fundamenta en un análisis de patrones característicos como rangos numéricos específicos, relaciones de correlación intercanal, distribuciones estadísticas predecibles y propiedades de separación cromática para intentar “adivinar” el espacio de color. Por ejemplo, el espacio HSV en OpenCV presenta el canal de matiz (Hue) acotado al rango <span class="math notranslate nohighlight">\([0,179]\)</span>, mientras que LAB exhibe una distribución centrada alrededor de <span class="math notranslate nohighlight">\(128\)</span> en sus componentes cromáticas A y B. Estas huellas digitales matemáticas permiten desarrollar algoritmos de clasificación que, mediante una lógica condicional y un análisis multivariable, infieren el espacio de color.</p>
+<p>La función <code class="docutils literal notranslate"><span class="pre">espacio_color()</span></code>, definida en el paquete <a class="reference download internal" download="" href="../../_downloads/b4ea5c2438e69bcf4b2ecb95a5783ddd/color_utils.py"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">utils.color_utils</span></code></span></a>, está diseñada para determinar de manera automática y sencilla el espacio de color de una imagen en formato OpenCV o NumPy, devolviendo una etiqueta indicativa —<code class="docutils literal notranslate"><span class="pre">GRAY</span></code>, <code class="docutils literal notranslate"><span class="pre">HSV</span></code>, <code class="docutils literal notranslate"><span class="pre">Lab/YCrCb</span></code>, <code class="docutils literal notranslate"><span class="pre">BGR/RGB</span></code> o <code class="docutils literal notranslate"><span class="pre">Desconocido</span></code>— junto con información diagnóstica útil como el tipo de dato, la forma y los rangos de valores de cada canal. Su estructura sigue una secuencia jerárquica de reglas: primero identifica si la imagen es en escala de grises (caso trivial), después busca los patrones característicos del espacio HSV (rango acotado de H entre 0 y 179 en formato uint8 o entre 0 y 360 en float), y finalmente recurre a un método más elaborado para discernir si la imagen pertenece al espacio Lab o YCrCb, que son dos codificaciones muy similares y difíciles de distinguir por simple inspección de sus valores numéricos.</p>
+<p>El reto principal surge precisamente en esta última etapa. Tanto <code class="docutils literal notranslate"><span class="pre">Lab</span></code> como <code class="docutils literal notranslate"><span class="pre">YCrCb</span></code> son espacios de color diseñados para separar la información de luminancia (brillo) de la información cromática (color), y ambos se representan en OpenCV como matrices de tres canales de 8 bits. En ambos casos, los canales cromáticos —a/b en <code class="docutils literal notranslate"><span class="pre">Lab</span></code> y Cr/Cb en <code class="docutils literal notranslate"><span class="pre">YCrCb</span></code>— se codifican con un valor medio de 128, de manera que los colores neutros o grises se sitúan alrededor de esa cifra y los desvíos hacia el rojo, verde, azul o amarillo se expresan como diferencias positivas o negativas respecto a ese punto medio. Esto provoca que, a nivel estadístico, las distribuciones de valores en imágenes reales sean muy parecidas: los dos canales de crominancia tienen medias cercanas a 128, desviaciones típicas moderadas y un rango limitado entre aproximadamente 80 y 180. Por ello, cualquier regla basada únicamente en medias o varianzas tiende a confundir ambos espacios, ya que su estructura numérica es casi indistinguible.</p>
+<p>Para resolver esta ambigüedad, la función utiliza un enfoque inspirado en la <strong>consistencia cíclica</strong>. El principio es simple: si tomamos una imagen y la convertimos a otro espacio de color, y luego aplicamos la conversión inversa, deberíamos recuperar algo muy próximo a la imagen original, siempre que la hipótesis sobre el espacio de partida sea correcta. Así, el algoritmo construye dos “ciclos” independientes:</p>
+<ol class="arabic simple">
+<li><p>Asume que la imagen está en YCrCb, la convierte a BGR mediante cv2.COLOR_YCrCb2BGR, y después vuelve a convertirla a YCrCb con cv2.COLOR_BGR2YCrCb.</p></li>
+<li><p>Repite el mismo proceso asumiendo que la imagen está en Lab (cv2.COLOR_Lab2BGR → cv2.COLOR_BGR2Lab).</p></li>
+</ol>
+<p>El resultado de cada ciclo se compara con la imagen original calculando el error cuadrático medio (MSE) entre ambas. Si la imagen pertenece realmente a uno de esos espacios, la conversión ida y vuelta debería ser casi perfecta —es decir, el error MSE será muy pequeño, típicamente inferior a 0.5 para datos de 8 bits— porque la operación de codificación y decodificación se realiza en el espacio correcto. En cambio, si la hipótesis es incorrecta (por ejemplo, se intenta reconstruir una imagen YCrCb como si fuera Lab), las transformaciones aplican matrices de conversión distintas y provocan pequeñas distorsiones de color que aumentan el error de reconstrucción.</p>
+<p>Este mecanismo de “hipótesis cíclicas” permite comparar las dos posibilidades sin conocer la imagen original en BGR, lo cual es extremadamente útil cuando se dispone de un conjunto de imágenes sin metadatos sobre su codificación de color. La función evalúa el MSE para ambos ciclos (Lab_mse y YCrCb_mse), y si alguno de los dos es muy bajo o existe una diferencia significativa entre ellos, la imagen se etiqueta como Lab/YCrCb, indicando que pertenece a uno de esos espacios. La razón de agrupar ambos bajo una sola etiqueta es pragmática: en ausencia de la referencia original, no es posible saber con certeza cuál de los dos espacios es el correcto, pero sí se puede afirmar con alta confianza que no es ni BGR, ni HSV, ni GRAY.</p>
+<p>La idea subyacente del uso de ciclos proviene de la verificación de consistencia en los sistemas de conversión de color. Un espacio de color bien definido y sus transformaciones inversas forman un mapeo biunívoco, lo que significa que aplicar la conversión directa seguida de la inversa debería devolver el mismo resultado (dentro de los límites de redondeo y cuantización). En la práctica, esta propiedad se utiliza para validar implementaciones de <code class="docutils literal notranslate"><span class="pre">cvtColor</span></code> y, en este caso, como herramienta diagnóstica: si una imagen mantiene su estructura tras un ciclo de ida y vuelta, la hipótesis sobre su espacio de color es coherente. En cambio, si el error aumenta, la hipótesis se descarta. Esta aproximación tiene además la ventaja de ser auto-contenida, ya que no requiere una imagen BGR original de referencia ni metadatos externos.</p>
+<p>Finalmente, si la imagen no encaja en ninguno de los patrones descritos —ni en el rango típico de HSV, ni presenta consistencia cíclica con Lab o YCrCb, ni se trata de un caso de escala de grises—, la función la clasifica como BGR/RGB por descarte, siempre que los valores se mantengan dentro de los límites esperados (<span class="math notranslate nohighlight">\(0–255\)</span> para <code class="docutils literal notranslate"><span class="pre">uint8</span></code> o <span class="math notranslate nohighlight">\(0–1\)</span> en <code class="docutils literal notranslate"><span class="pre">float</span></code>).</p>
+<p>Podemos comprobar su funcionamiento usando las imágenes transformadas anteriores:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">utils.color_utils</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">color_utils</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">img</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">&quot;img_rgb&quot;</span><span class="p">,</span><span class="n">img_rgb</span><span class="p">),(</span><span class="s2">&quot;img_gray&quot;</span><span class="p">,</span><span class="n">img_gray</span><span class="p">),(</span><span class="s2">&quot;img_hsv&quot;</span><span class="p">,</span><span class="n">img_hsv</span><span class="p">),(</span><span class="s2">&quot;img_lab&quot;</span><span class="p">,</span><span class="n">img_lab</span><span class="p">),(</span><span class="s2">&quot;img_ycrcb&quot;</span><span class="p">,</span><span class="n">img_ycrcb</span><span class="p">)]:</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="n">color_utils</span><span class="o">.</span><span class="n">espacio_color</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">6s</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;espacio&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">10s</span><span class="si">}</span><span class="s2">  rangos=</span><span class="si">{</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;rangos&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">  ciclos=</span><span class="si">{</span><span class="n">info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ciclos&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>img_rgb → BGR/RGB     rangos={&#39;C0&#39;: (0.0, 255.0), &#39;C1&#39;: (0.0, 255.0), &#39;C2&#39;: (0.0, 255.0)}  ciclos={&#39;YCrCb_mse&#39;: 614.269, &#39;Lab_mse&#39;: 2194.921}
+img_gray → GRAY        rangos={&#39;Canal&#39;: (0.0, 255.0)}  ciclos={}
+img_hsv → HSV         rangos={&#39;C0&#39;: (0.0, 179.0), &#39;C1&#39;: (0.0, 255.0), &#39;C2&#39;: (0.0, 255.0)}  ciclos={}
+img_lab → Lab/YCrCb   rangos={&#39;C0&#39;: (0.0, 255.0), &#39;C1&#39;: (101.0, 184.0), &#39;C2&#39;: (100.0, 192.0)}  ciclos={&#39;YCrCb_mse&#39;: 7.125, &#39;Lab_mse&#39;: 0.051}
+img_ycrcb → Lab/YCrCb   rangos={&#39;C0&#39;: (0.0, 255.0), &#39;C1&#39;: (85.0, 204.0), &#39;C2&#39;: (64.0, 156.0)}  ciclos={&#39;YCrCb_mse&#39;: 0.0, &#39;Lab_mse&#39;: 3.895}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Como se puede apreciar el sistema detecta con buena certeza el espacio de colores de una imagen. La discriminación entre <code class="docutils literal notranslate"><span class="pre">Lab</span></code>e <code class="docutils literal notranslate"><span class="pre">YCrCb</span></code>es ahora fácilmente asumible atendiendo al valor del <code class="docutils literal notranslate"><span class="pre">_mse</span></code> que se muestr en <code class="docutils literal notranslate"><span class="pre">ciclos</span></code>.</p>
+</section>
+<section id="operaciones-con-canales">
+<h3>3.4 Operaciones con canales<a class="headerlink" href="#operaciones-con-canales" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">cv2</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Configuración para visualización</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+
+<span class="c1"># Cargar la imagen</span>
+<span class="n">imagen</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../img/imagen_3.jpg&#39;</span><span class="p">)</span>
+
+<span class="c1"># Convertir de BGR (formato OpenCV) a RGB</span>
+<span class="n">imagen_rgb</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">imagen</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
+
+<span class="c1"># Mostrar la imagen original</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">imagen_rgb</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Imagen Original - RGB&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="c1"># Separar la imagen en sus canales RGB</span>
+<span class="n">canal_r</span><span class="p">,</span> <span class="n">canal_g</span><span class="p">,</span> <span class="n">canal_b</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">imagen_rgb</span><span class="p">)</span>
+
+<span class="c1"># Crear imágenes en escala de grises para cada canal</span>
+<span class="n">canal_r_gris</span> <span class="o">=</span> <span class="n">canal_r</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">canal_g_gris</span> <span class="o">=</span> <span class="n">canal_g</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">canal_b_gris</span> <span class="o">=</span> <span class="n">canal_b</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Crear imágenes donde solo se muestra un canal y los demás son cero</span>
+<span class="n">ceros</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">canal_r</span><span class="p">)</span>
+
+<span class="n">canal_r_puro</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">merge</span><span class="p">([</span><span class="n">canal_r</span><span class="p">,</span> <span class="n">ceros</span><span class="p">,</span> <span class="n">ceros</span><span class="p">])</span>
+<span class="n">canal_g_puro</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">merge</span><span class="p">([</span><span class="n">ceros</span><span class="p">,</span> <span class="n">canal_g</span><span class="p">,</span> <span class="n">ceros</span><span class="p">])</span>
+<span class="n">canal_b_puro</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">merge</span><span class="p">([</span><span class="n">ceros</span><span class="p">,</span> <span class="n">ceros</span><span class="p">,</span> <span class="n">canal_b</span><span class="p">])</span>
+
+<span class="c1"># Visualizar los canales</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+
+<span class="c1"># Canal Rojo</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">canal_r_gris</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Canal Rojo (Intensidad)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">canal_r_puro</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Canal Rojo (Puro)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="c1"># Canal Verde</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">canal_g_gris</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Canal Verde (Intensidad)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">canal_g_puro</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Canal Verde (Puro)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="c1"># Canal Azul</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">canal_b_gris</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Canal Azul (Intensidad)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">canal_b_puro</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Canal Azul (Puro)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/99b4aaed7330b2f9d16704a57a6c85436ecaeca5f9d9b21075e13398d967aeb9.png" src="../../_images/99b4aaed7330b2f9d16704a57a6c85436ecaeca5f9d9b21075e13398d967aeb9.png" />
+<img alt="../../_images/49e73953584e7c8ad9959d69a33a4c7b3f44397a719c91e553678381c793f297.png" src="../../_images/49e73953584e7c8ad9959d69a33a4c7b3f44397a719c91e553678381c793f297.png" />
+</div>
+</div>
+<p>La función <code class="docutils literal notranslate"><span class="pre">cv2.split()</span></code> separa la imagen multicanales pasada como parámetro en sus componentes individuales. Toma una imagen en color (generalmente en formato BGR o RGB) y devuelve cada canal como una matriz independiente en escala de grises. Es importante tener en cuenta el espacio de color de la imagen original para interpretar adecuadamente los canales individuales. Considere, por ejemplo, que no es lo mismo una imagen BGR (Blue, Green, Red) que una imagen RGB (Red, Green, Blue).</p>
+<p>En el código anterior se han obtenido los tres canales: rojo, verde y azul, visualizando cada uno de ellos en su forma de intensidad (escala de grises) y de color puro.</p>
+<p>La <strong>representación por intensidad</strong> muestra el canal como una imagen en escala de grises, donde cada píxel contiene únicamente el valor numérico de intensidad de ese canal específico. En esta visualización, los valores bajos (cercanos a 0) se muestran como negro o tonos oscuros, mientras que los valores altos (cercanos a 255) aparecen como blanco o tonos claros. Esta es esencialmente una matriz bidimensional donde cada elemento representa la intensidad del color rojo en ese píxel particular. Es importante entender que aunque estemos visualizando el canal rojo, lo vemos en escala de grises porque estamos mostrando solo la información de intensidad, no el color real. Esta representación es extremadamente útil para análisis cuantitativos, procesamiento de imágenes y operaciones matemáticas, ya que al trabajar con un solo canal se reduce la complejidad computacional y se facilita la extracción de características específicas.</p>
+<p>La <strong>representación de canal puro</strong>, por otro lado, mantiene la imagen en formato RGB pero con una particularidad crucial: solo el canal que nos interesa (en este caso el rojo) contiene valores diferentes de cero, mientras que los otros dos canales (verde y azul) se establecen en cero. Esto crea una imagen donde visualmente vemos solo el componente rojo en su color verdadero, pero técnicamente seguimos teniendo una matriz tridimensional. Cuando un píxel tiene un valor alto en el canal rojo y cero en los otros canales, lo veremos como un rojo intenso; si el valor es bajo, será un rojo oscuro o casi negro. Esta representación es particularmente valiosa para comprender cómo contribuye cada canal individual al color final de la imagen y para visualizar efectos de manipulación de color antes de recombinar los canales.</p>
+<p>La diferencia clave radica en que la <strong>intensidad</strong> nos da información cuantitativa sobre la distribución y valores del canal, ideal para procesamiento y análisis, mientras que el canal puro nos muestra la contribución visual real de ese canal al color final. Por ejemplo, si un área de la imagen aparece brillante en la representación de intensidad del canal rojo, sabemos que esa área tiene valores altos de rojo; si la misma área aparece como rojo intenso en la representación pura, confirmamos visualmente la fuerte presencia del componente rojo en esa región. Ambas representaciones son complementarias: la primera para el análisis técnico y la segunda para la comprensión visual del impacto cromático de cada canal.</p>
+<p>La función complementaria a <code class="docutils literal notranslate"><span class="pre">cv2.split()</span></code> es <code class="docutils literal notranslate"><span class="pre">cv2.merge()</span></code> que permite recombinar canales individuales en una imagen multicanales. Toma varias matrices en escala de grises (cada una representando un canal) y las fusiona en una sola imagen de múltiples canales.</p>
+<section id="histogramas">
+<h4>Histogramas<a class="headerlink" href="#histogramas" title="Link to this heading">#</a></h4>
+<p>Los histogramas en visión por computadora representan la distribución de intensidades de los píxeles en una imagen o canal específico, mostrando gráficamente cuántos píxeles existen para cada valor de intensidad entre 0 (negro) y 255 (blanco). Esta herramienta de análisis proporciona una visión cuantitativa inmediata sobre las características tonales de una imagen: un histograma concentrado hacia la izquierda indica una imagen predominantemente oscura, uno desplazado a la derecha sugiere una imagen clara, mientras que una distribución equilibrada revela buen contraste. En el trabajo con canales RGB, los histogramas permiten analizar por separado la contribución de cada componente de color, detectar dominantes cromáticas, evaluar el balance de blancos y guiar operaciones de mejora como la ecualización o ajuste de brillo y contraste, sirviendo como diagnóstico esencial antes de aplicar cualquier modificación a la imagen.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calcular histogramas para cada canal</span>
+<span class="n">hist_r</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">calcHist</span><span class="p">([</span><span class="n">canal_r</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="mi">256</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">])</span>
+<span class="n">hist_g</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">calcHist</span><span class="p">([</span><span class="n">canal_g</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="mi">256</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">])</span>
+<span class="n">hist_b</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">calcHist</span><span class="p">([</span><span class="n">canal_b</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="mi">256</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">])</span>
+
+<span class="c1"># Visualizar histogramas</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hist_r</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Canal Rojo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hist_g</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Canal Verde&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hist_b</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Canal Azul&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Histogramas de los Canales RGB&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Valor de Intensidad&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frecuencia&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Histogramas individuales</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># Histograma canal rojo</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hist_r</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Histograma - Canal Rojo&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Intensidad&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frecuencia&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># Histograma canal verde</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hist_g</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Histograma - Canal Verde&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Intensidad&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frecuencia&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># Histograma canal azul</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hist_b</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Histograma - Canal Azul&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Intensidad&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frecuencia&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/c3e02f18c363876633fbf7283fd10c5550f500335ab4f189932b92c3e0e2c205.png" src="../../_images/c3e02f18c363876633fbf7283fd10c5550f500335ab4f189932b92c3e0e2c205.png" />
+<img alt="../../_images/a88e1ac521d677528f68a0de32adb01775f81e2df1e2edb2299afc6d2040dfe9.png" src="../../_images/a88e1ac521d677528f68a0de32adb01775f81e2df1e2edb2299afc6d2040dfe9.png" />
+</div>
+</div>
+<p>El paquete <code class="docutils literal notranslate"><span class="pre">utils.color_utils</span></code> contiene la función <code class="docutils literal notranslate"><span class="pre">modificar_canal</span></code> que sirve para ilustrar cómo procesar una imagen variando el brillo, contraste y/o inversión de cada canal. Esta función recibe como parámetro un canal de intensidad, la operación a realizar y un factor, devolviendo la correspondiente matriz modificada.</p>
+<p>Veamos un ejemplo práctico de uso.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">utils.color_utils</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">color_utils</span>
+
+<span class="c1"># Ejemplo 1: Aumentar brillo del canal rojo</span>
+<span class="n">canal_r_mod</span> <span class="o">=</span> <span class="n">color_utils</span><span class="o">.</span><span class="n">modificar_canal</span><span class="p">(</span><span class="n">canal_r</span><span class="p">,</span> <span class="s1">&#39;brillo&#39;</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mf">1.3</span><span class="p">)</span>
+<span class="n">imagen_mod_1</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">merge</span><span class="p">([</span><span class="n">canal_r_mod</span><span class="p">,</span> <span class="n">canal_g</span><span class="p">,</span> <span class="n">canal_b</span><span class="p">])</span>
+
+<span class="c1"># Ejemplo 2: Aumentar contraste del canal verde</span>
+<span class="n">canal_g_mod</span> <span class="o">=</span> <span class="n">color_utils</span><span class="o">.</span><span class="n">modificar_canal</span><span class="p">(</span><span class="n">canal_g</span><span class="p">,</span> <span class="s1">&#39;contraste&#39;</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mf">1.8</span><span class="p">)</span>
+<span class="n">imagen_mod_2</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">merge</span><span class="p">([</span><span class="n">canal_r</span><span class="p">,</span> <span class="n">canal_g_mod</span><span class="p">,</span> <span class="n">canal_b</span><span class="p">])</span>
+
+<span class="c1"># Ejemplo 3: Invertir canal azul</span>
+<span class="n">canal_b_mod</span> <span class="o">=</span> <span class="n">color_utils</span><span class="o">.</span><span class="n">modificar_canal</span><span class="p">(</span><span class="n">canal_b</span><span class="p">,</span> <span class="s1">&#39;invertir&#39;</span><span class="p">)</span>
+<span class="n">imagen_mod_3</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">merge</span><span class="p">([</span><span class="n">canal_r</span><span class="p">,</span> <span class="n">canal_g</span><span class="p">,</span> <span class="n">canal_b_mod</span><span class="p">])</span>
+
+<span class="c1"># Visualizar resultados</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="c1"># Imagen original</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">imagen_rgb</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Imagen Original&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="c1"># Brillo aumentado en canal rojo</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">imagen_mod_1</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Brillo ↑ Canal Rojo (x1.3)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="c1"># Contraste aumentado en canal verde</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">imagen_mod_2</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Contraste ↑ Canal Verde (x1.8)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="c1"># Canal azul invertido</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">imagen_mod_3</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Canal Azul Invertido&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/9e396ead289a6f61e725761b33d8233ecce8922bc159eb559651fcfe614f7db1.png" src="../../_images/9e396ead289a6f61e725761b33d8233ecce8922bc159eb559651fcfe614f7db1.png" />
+</div>
+</div>
+<p>Podemos comprobar igualmente el impacto en los histogramas de  cualquiera de las modificaciones anteriores, p.ej: Canal azul invertido</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calcular histogramas de la imagen modificada</span>
+<span class="n">canal_r_mod</span><span class="p">,</span> <span class="n">canal_g_mod</span><span class="p">,</span> <span class="n">canal_b_mod</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">imagen_mod_3</span><span class="p">)</span>
+
+<span class="n">hist_r_mod</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">calcHist</span><span class="p">([</span><span class="n">canal_r_mod</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="mi">256</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">])</span>
+<span class="n">hist_g_mod</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">calcHist</span><span class="p">([</span><span class="n">canal_g_mod</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="mi">256</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">])</span>
+<span class="n">hist_b_mod</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">calcHist</span><span class="p">([</span><span class="n">canal_b_mod</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="mi">256</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">])</span>
+
+<span class="c1"># Comparar histogramas antes y después</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+
+<span class="c1"># Canal Rojo</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hist_r</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Original&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Canal Rojo - Original&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hist_r_mod</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Modificado&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Canal Rojo - Modificado&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># Canal Verde</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hist_g</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Original&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Canal Verde - Original&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hist_g_mod</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Modificado&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Canal Verde - Modificado&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># Canal Azul</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hist_b</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Original&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Canal Azul - Original&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hist_b_mod</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Modificado&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Canal Azul - Modificado&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/29fd2449fc8e1f3bde7d78ce9c10b124d3539d6547844985ff4d2469f2569370.png" src="../../_images/29fd2449fc8e1f3bde7d78ce9c10b124d3539d6547844985ff4d2469f2569370.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/Day1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../../intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome to your Jupyter Book</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Dia01_Ejercicios.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Ejercicios</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptos-clave-y-fundamentos-matematicos">1. Conceptos clave y fundamentos matemáticos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imagen-como-funcion-matriz">1.1 Imagen como función/matriz</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imagenes-como-tensores">1.2 Imágenes como tensores</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#espacios-de-color">2. Espacios de color</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptos-fundamentales">2.1 Conceptos fundamentales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-matematicos-simplificados">2.2 Modelos matemáticos simplificados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#espacio-de-color-lineal-vs-no-lineal-gamma">2.3. Espacio de color lineal vs. no lineal (gamma)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operaciones-fundamentales">3. Operaciones fundamentales</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-s-de-imagenes">3.1 E/S de imágenes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inspeccionar-caracteristicas-de-una-imagen">3.2 Inspeccionar características de una imagen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion-entre-espacios-de-color">3.3 Conversión entre espacios de color</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operaciones-con-canales">3.4 Operaciones con canales</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#histogramas">Histogramas</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Javier Álvarez Osuna
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
